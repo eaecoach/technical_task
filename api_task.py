@@ -27,25 +27,29 @@ def get_reservations():
 
 @app.route('/device/add', methods=['POST'])
 def device_add():
+    exists = False
     device = request.json
     device_name = device['DeviceName']
     for i in range(len(reservations)):
         if device_name == reservations[i]['DeviceName']:
             message = 'Device already exists!'
             status = 400
-        else:
-            new_device = {
-        "DeviceName": f'{device_name}',
-        "ReservationStatus": "free",
-        "ReservationPeriod": {
-            "From": "none",
-            "To": "none"
+            exists = True
+
+    if not exists:
+        new_device = {
+    "DeviceName": f'{device_name}',
+    "ReservationStatus": "free",
+    "ReservationPeriod": {
+        "From": "none",
+        "To": "none"
         },
-        "ReservationOwner": "none"
+    "ReservationOwner": "none"
     }
-            reservations.append(new_device)
-            message = f'Successfully added device - {device_name}!'
-            status = 200
+        reservations.append(new_device)
+        message = f'Successfully added device - {device_name}!'
+        status = 200
+
 
     response = app.response_class(
         response=json.dumps(message),
@@ -56,17 +60,23 @@ def device_add():
     return response
 
 
-@app.route('/device/del/', methods=['DELETE'])
+@app.route('/device/del', methods=['DELETE'])
 def device_del():
+    delete = False
+    index = []
     device_id = str(request.args.get('id'))
     for i in range(len(reservations)):
         if device_id == reservations[i]['DeviceName']:
-            reservations.pop(i)
+            delete = True
+            index.append(i)
             message = f'Removed device - {device_id}!'
             status = 200
         else:
             message = 'Device not found!'
             status = 404
+    if delete:
+        for ind in sorted(index, reverse=True):
+            del reservations[ind]
 
     response = app.response_class(
         response=json.dumps(message),
