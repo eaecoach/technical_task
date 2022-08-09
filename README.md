@@ -6,7 +6,7 @@ Using API:
 - run api_task.py
 - API run on localhost
 
-For running test automation manually use:
+For running test automation manually first the api_task.py should be run locally, while the APIs are hosted use:
 1. running all tests - go to tests directory in this repo and use command
 ```
 pytest
