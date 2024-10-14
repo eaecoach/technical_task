@@ -1,1 +1,1 @@
-web: python ..\technical_task\source\task\api_task.py --host=0.0.0.0 --port=$PORT
+web: python -m flask run --host=0.0.0.0 --port=$PORT
