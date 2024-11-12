@@ -26,10 +26,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://someurl/resevation",
+					"raw": "http://localhost:8080/resevation",
 					"protocol": "http",
 					"host": [
-						"someurl"
+						"localhost:8080"
 					],
 					"path": [
 						"resevation"
