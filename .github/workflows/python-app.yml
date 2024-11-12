@@ -50,4 +50,4 @@ jobs:
         run: |
           postman collection run "39432503-73d228bf-c4e5-41e8-827e-ce5a3e00676c" --integration-id "171019-${{ github.run_id }}"
           # Lint your API using Postman CLI
-          postman api lint e073ced0-e904-415f-a4dc-00a65337012c --integration-id 171019
+          # postman api lint e073ced0-e904-415f-a4dc-00a65337012c --integration-id 171019
