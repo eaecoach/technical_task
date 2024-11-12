@@ -30,6 +30,17 @@ jobs:
           done
           echo "Flask API is now available!"
 
+      - name: Run Pytest
+        run: |
+          pytest --maxfail=1 --disable-warnings -q  # You can adjust pytest flags as needed
+
+      - name: Upload pytest results as artifacts
+        if: failure()  # Only upload if tests fail
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: test-results.xml  # Specify the path to your pytest result file, if needed
+
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
