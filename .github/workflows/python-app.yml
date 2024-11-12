@@ -41,13 +41,7 @@ jobs:
           name: pytest-results
           path: test-results.xml  # Specify the path to your pytest result file, if needed
 
-      - name: Install Postman CLI
-        run: |
-          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-      - name: Login to Postman CLI
-        run: postman login --with-api-key PMAK-6733629189240500013e4d89-f84c7a9b09f51e0ec39f8c327721be258a
-      - name: Run API tests
-        run: |
-          postman collection run "39432503-73d228bf-c4e5-41e8-827e-ce5a3e00676c" --integration-id "171019-${{ github.run_id }}"
-          # Lint your API using Postman CLI
-          # postman api lint e073ced0-e904-415f-a4dc-00a65337012c --integration-id 171019
+      - name: Postman test
+        uses: matt-ball/newman-action@master
+        with:
+          collection: Test Flask app.postman_collection.json
