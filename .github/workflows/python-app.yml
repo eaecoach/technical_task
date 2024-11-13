@@ -18,6 +18,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Behave
+        run: |
+          pip install behave  # Installs the Behave framework
+
       - name: Run Flask app
         run: |
           nohup python app.py &  # Run Flask app in background (assumes 'app.py' is your Flask app)
@@ -34,7 +38,11 @@ jobs:
         run: |
           pytest --maxfail=1 --disable-warnings -q --capture=no
 
-      - name: Postman test
-        uses: matt-ball/newman-action@master
-        with:
-          collection: Test Flask app.postman_collection.json
+      - name: Run Behave tests
+        run: |
+          behave
+
+   #   - name: Postman test
+   #    uses: matt-ball/newman-action@master
+   #     with:
+   #      collection: Test Flask app.postman_collection.json
