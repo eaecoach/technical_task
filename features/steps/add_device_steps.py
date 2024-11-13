@@ -9,7 +9,7 @@ def test_add_device_step(context):
     header = {'Content-Type': 'application/json'}
     body = {"DeviceName": "device_3_for_testing_behave"}
     context.response = requests.post('http://localhost:8080/device/add', data=json.dumps(body), headers=header)
-    assert context.response.json() == 'Successfully added device - device_3!', 'Add device response incorrect! ' + str(context.response.json())
+    assert context.response.json() == 'Successfully added device - device_3_for_testing_behave!', 'Add device response incorrect! ' + str(context.response.json())
     assert context.response.status_code == 200, 'Add device status code incorrect!'
 
 
